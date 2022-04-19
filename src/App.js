@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Com from './com';
+
+import {Provider} from 'react-redux';
+
+import store from "./store";
+
+import {Increment,Decrement} from './actions';
+// import {reducer} from './reducer';
 
 function App() {
+  let increment=()=>{
+    store.dispatch({type:Increment});
+    // console.log("hi"+store.getState().count);
+  }
   return (
-    <div className="App">
+    
+    <Provider store={store}>
+      <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>redux</h1>
+        <Com/><br></br>
+        <button onClick={increment}>In</button>
+        <button onClick={()=>store.dispatch({type:Decrement})}>De</button>
+
       </header>
     </div>
+    </Provider>
   );
 }
-
 export default App;
